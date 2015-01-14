@@ -8,7 +8,7 @@ INCLUDEPATH += $$PWD
 
 SOURCES +=  $$PWD/videoengine.cpp \
     $$PWD/videowidget.cpp \
-    ../videoengine/videoformat.cpp
+    $$PWD/videoformat.cpp
 
 HEADERS  += $$PWD/videoengine.h \
     $$PWD/videowidget.h \
