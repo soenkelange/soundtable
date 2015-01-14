@@ -15,6 +15,13 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+protected:
+    void initDevicesMenu();
+
+private slots:
+    void openCameraDevice(QAction* action);
+    void openFile();
+
 private:
     Ui::MainWindow *ui;
 };
