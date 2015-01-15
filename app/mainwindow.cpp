@@ -13,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     connect(ui->actionOpenFile, SIGNAL(triggered()), this, SLOT(openFile()));
     initDevicesMenu();
+    initProjectsMenu();
 }
 
 MainWindow::~MainWindow()
@@ -34,6 +35,20 @@ void MainWindow::initDevicesMenu() {
     connect(videoDevicesGroup, SIGNAL(triggered(QAction*)), this, SLOT(openCameraDevice(QAction*)));
 }
 
+void MainWindow::initProjectsMenu() {
+    QActionGroup *projectsGroup = new QActionGroup(this);
+
+    QAction *projectA = new QAction("Projekt A", projectsGroup);
+    projectA->setCheckable(true);
+    ui->menuProjects->addAction(projectA);
+
+    QAction *projectB = new QAction("Projekt B", projectsGroup);
+    projectB->setCheckable(true);
+    ui->menuProjects->addAction(projectB);
+
+    connect(projectsGroup, SIGNAL(triggered(QAction*)), this, SLOT(openProject(QAction*)));
+}
+
 void MainWindow::openCameraDevice(QAction *action) {
     QCameraInfo cameraInfo = qvariant_cast<QCameraInfo>(action->data());
     qDebug() << "MainWindow::openCameraDevice - Device " << cameraInfo.description();
@@ -41,6 +56,10 @@ void MainWindow::openCameraDevice(QAction *action) {
 
 void MainWindow::openFile() {
     qDebug() << "MainWindow::openFile";
+}
+
+void MainWindow::openProject(QAction *action) {
+    qDebug() << "Open project";
 }
 
 
