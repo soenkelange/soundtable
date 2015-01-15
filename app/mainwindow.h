@@ -1,6 +1,9 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "abstractprojectfactory.h"
+#include "projectinfo.h"
+#include "projectwidget.h"
 #include <QMainWindow>
 
 namespace Ui {
@@ -19,6 +22,8 @@ protected:
     void initDevicesMenu();
     void initProjectsMenu();
 
+    void changeProject(AbstractProjectFactory::PROJECT_FACTORIES newProject);
+
 private slots:
     void openCameraDevice(QAction* action);
     void openFile();
@@ -26,6 +31,9 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    AbstractProjectFactory::PROJECT_FACTORIES currentProject;
+    ProjectInfo *currentProjectInfo;
+    ProjectWidget *currentProjectWidget;
 };
 
 #endif // MAINWINDOW_H
