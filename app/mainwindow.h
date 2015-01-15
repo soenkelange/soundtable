@@ -17,10 +17,12 @@ public:
 
 protected:
     void initDevicesMenu();
+    void initProjectsMenu();
 
 private slots:
     void openCameraDevice(QAction* action);
     void openFile();
+    void openProject(QAction* action);
 
 private:
     Ui::MainWindow *ui;
