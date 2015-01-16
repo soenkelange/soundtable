@@ -16,7 +16,7 @@ public:
     virtual ~AbstractProjectFactory(){}
 
     virtual AbstractProjectInfo* createProjectInfo() = 0;
-    virtual AbstractProjectWidget* createProjectWidget() = 0;
+    Q_DECL_DEPRECATED virtual AbstractProjectWidget* createProjectWidget() = 0;
     virtual AbstractProjectWidget* createProjectWidget(QWidget *parent, AbstractProjectInfo *projectInfo) = 0;
 
     static AbstractProjectFactory* createFactory(PROJECT_FACTORIES factory);
