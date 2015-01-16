@@ -36,8 +36,6 @@ public:
 
 private:
     AbstractProjectInfo *_projectInfo;
-    QLayout *layout;
-    QLabel *nameLabel;
 
 };
 

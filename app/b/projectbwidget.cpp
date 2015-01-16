@@ -6,6 +6,7 @@ ProjectBWidget::ProjectBWidget(QWidget *parent, AbstractProjectInfo *projectInfo
     ui(new Ui::ProjectBWidget)
 {
     ui->setupUi(this);
+    ui->projectName->setText(projectInfo->name());
 }
 
 ProjectBWidget::~ProjectBWidget()
