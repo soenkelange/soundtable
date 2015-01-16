@@ -11,8 +11,10 @@ class ProjectBFactory : public AbstractProjectFactory
 public:
     ProjectBFactory() {}
     ~ProjectBFactory() {}
+
     ProjectInfo* createProjectInfo();
     ProjectWidget* createProjectWidget();
+    ProjectWidget* createProjectWidget(QWidget *parent, ProjectInfo *projectInfo);
 
 };
 

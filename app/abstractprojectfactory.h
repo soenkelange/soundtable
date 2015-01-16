@@ -17,6 +17,7 @@ public:
 
     virtual ProjectInfo* createProjectInfo() = 0;
     virtual ProjectWidget* createProjectWidget() = 0;
+    virtual ProjectWidget* createProjectWidget(QWidget *parent, ProjectInfo *projectInfo) = 0;
 
     static AbstractProjectFactory* createFactory(PROJECT_FACTORIES factory);
 };

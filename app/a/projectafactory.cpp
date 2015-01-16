@@ -10,6 +10,10 @@ ProjectInfo* ProjectAFactory::createProjectInfo()
 
 ProjectWidget* ProjectAFactory::createProjectWidget()
 {
-   return new AbstractProjectWidget(0, "Project A");
+   return new AbstractProjectWidget(0, createProjectInfo());
+}
+
+ProjectWidget* ProjectAFactory::createProjectWidget(QWidget *parent, ProjectInfo *projectInfo) {
+    return new AbstractProjectWidget(parent, projectInfo);
 }
 

@@ -2,10 +2,12 @@
 
 #include <QHBoxLayout>
 
-AbstractProjectWidget::AbstractProjectWidget(QWidget *parent, QString projectName) :
+AbstractProjectWidget::AbstractProjectWidget(QWidget *parent, ProjectInfo *projectInfo) :
     ProjectWidget(parent)
 {
-    nameLabel = new QLabel(projectName);
+    _projectInfo = projectInfo;
+
+    nameLabel = new QLabel(projectInfo->name());
     nameLabel->setAlignment(Qt::AlignCenter);
 
     layout = new QVBoxLayout;
@@ -19,3 +21,10 @@ AbstractProjectWidget::~AbstractProjectWidget()
     delete nameLabel;
     delete layout;
 }
+
+ProjectInfo* AbstractProjectWidget::projectInfo() const
+{
+    return _projectInfo;
+}
+
+
