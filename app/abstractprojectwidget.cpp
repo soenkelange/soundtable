@@ -1,5 +1,4 @@
 #include "abstractprojectwidget.h"
-#include "ui_abstractprojectwidget.h"
 
 #include <QHBoxLayout>
 
