@@ -4,11 +4,13 @@
 #include "abstractprojectfactory.h"
 #include "projectinfo.h"
 #include "projectwidget.h"
+#include "videoengine.h"
 
 #include <QCameraInfo>
+#include <QMessageBox>
+#include <QFileDialog>
 #include <QDebug>
 
-Q_DECLARE_METATYPE(QCameraInfo)
 Q_DECLARE_METATYPE(AbstractProjectFactory::PROJECT_FACTORIES)
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -38,7 +40,7 @@ void MainWindow::initDevicesMenu() {
         QCameraInfo cameraInfo = cameraList.at(i);
         QAction *videoDeviceAction = new QAction(cameraInfo.description(), videoDevicesGroup);
         videoDeviceAction->setCheckable(true);
-        videoDeviceAction->setData(QVariant::fromValue(cameraInfo));
+        videoDeviceAction->setData(QVariant(i));
         ui->menuOpenDevice->addAction(videoDeviceAction);
     }
     connect(videoDevicesGroup, SIGNAL(triggered(QAction*)), this, SLOT(openCameraDevice(QAction*)));
@@ -87,13 +89,38 @@ void MainWindow::changeProject(AbstractProjectFactory::PROJECT_FACTORIES newProj
     delete factory;
 }
 
+void MainWindow::displayNoProjectSelectedError() {
+    QMessageBox::warning(
+                this,
+                "Kein Projekt ausgewählt",
+                "Bitte wählen Sie ein Projekt aus dem Projekt-Menü aus.");
+}
+
 void MainWindow::openCameraDevice(QAction *action) {
-    QCameraInfo cameraInfo = qvariant_cast<QCameraInfo>(action->data());
-    qDebug() << "MainWindow::openCameraDevice - Device " << cameraInfo.description();
+    if(currentProject == AbstractProjectFactory::NO_PROJECT) {
+        action->setChecked(false);
+        displayNoProjectSelectedError();
+        return;
+    }
+    int device = qvariant_cast<int>(action->data());
+    qDebug() << "Select device " << device;
 }
 
 void MainWindow::openFile() {
-    qDebug() << "MainWindow::openFile";
+    if (currentProject == AbstractProjectFactory::NO_PROJECT) {
+        displayNoProjectSelectedError();
+        return;
+    }
+    QFileDialog fileDialog(
+                this,
+                tr("Video öffnen"),
+                QDir::homePath(),
+                tr("Video Dateien (*.wmv *.mpg *mpeg *.avi"));
+    fileDialog.setFileMode(QFileDialog::ExistingFile);
+    if(fileDialog.exec()) {
+        QString fileName = fileDialog.selectedFiles().at(0);
+        qDebug() << "Open file " << fileName;
+    }
 }
 
 void MainWindow::openProject(QAction *action) {

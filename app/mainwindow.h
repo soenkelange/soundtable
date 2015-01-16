@@ -23,6 +23,7 @@ protected:
     void initProjectsMenu();
 
     void changeProject(AbstractProjectFactory::PROJECT_FACTORIES newProject);
+    void displayNoProjectSelectedError();
 
 private slots:
     void openCameraDevice(QAction* action);
