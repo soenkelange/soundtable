@@ -2,8 +2,8 @@
 #define PROJECTBFACTORY_H
 
 #include "abstractprojectfactory.h"
-#include "projectinfo.h"
-#include "projectwidget.h"
+#include "abstractprojectinfo.h"
+#include "abstractprojectwidget.h"
 
 class ProjectBFactory : public AbstractProjectFactory
 {
@@ -12,9 +12,9 @@ public:
     ProjectBFactory() {}
     ~ProjectBFactory() {}
 
-    ProjectInfo* createProjectInfo();
-    ProjectWidget* createProjectWidget();
-    ProjectWidget* createProjectWidget(QWidget *parent, ProjectInfo *projectInfo);
+    AbstractProjectInfo* createProjectInfo();
+    AbstractProjectWidget* createProjectWidget();
+    AbstractProjectWidget* createProjectWidget(QWidget *parent, AbstractProjectInfo *projectInfo);
 
 };
 

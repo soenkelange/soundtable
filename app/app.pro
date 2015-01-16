@@ -23,9 +23,7 @@ SOURCES += main.cpp\
 HEADERS  += mainwindow.h \
     a/projectafactory.h \
     b/projectbfactory.h \
-    projectinfo.h \
     abstractprojectinfo.h \
-    projectwidget.h \
     abstractprojectwidget.h \
     abstractprojectfactory.h
 

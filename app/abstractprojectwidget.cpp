@@ -2,8 +2,8 @@
 
 #include <QHBoxLayout>
 
-AbstractProjectWidget::AbstractProjectWidget(QWidget *parent, ProjectInfo *projectInfo) :
-    ProjectWidget(parent)
+AbstractProjectWidget::AbstractProjectWidget(QWidget *parent, AbstractProjectInfo *projectInfo) :
+    QWidget(parent)
 {
     _projectInfo = projectInfo;
 
@@ -22,7 +22,7 @@ AbstractProjectWidget::~AbstractProjectWidget()
     delete layout;
 }
 
-ProjectInfo* AbstractProjectWidget::projectInfo() const
+AbstractProjectInfo* AbstractProjectWidget::projectInfo() const
 {
     return _projectInfo;
 }

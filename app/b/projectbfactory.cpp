@@ -3,17 +3,17 @@
 #include "abstractprojectinfo.h"
 #include "abstractprojectwidget.h"
 
-ProjectInfo* ProjectBFactory::createProjectInfo()
+AbstractProjectInfo* ProjectBFactory::createProjectInfo()
 {
     return new AbstractProjectInfo("Project B");
 }
 
-ProjectWidget* ProjectBFactory::createProjectWidget()
+AbstractProjectWidget* ProjectBFactory::createProjectWidget()
 {
    return new AbstractProjectWidget(0, createProjectInfo());
 }
 
-ProjectWidget* ProjectBFactory::createProjectWidget(QWidget *parent, ProjectInfo *projectInfo) {
+AbstractProjectWidget* ProjectBFactory::createProjectWidget(QWidget *parent, AbstractProjectInfo *projectInfo) {
     return new AbstractProjectWidget(parent, projectInfo);
 }
 

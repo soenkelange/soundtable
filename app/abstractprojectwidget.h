@@ -1,24 +1,24 @@
 #ifndef ABSTRACTPROJECTWIDGET_H
 #define ABSTRACTPROJECTWIDGET_H
 
-#include "projectwidget.h"
-#include "projectinfo.h"
+#include "abstractprojectinfo.h"
 
+#include <QWidget>
 #include <QLayout>
 #include <QLabel>
 
-class AbstractProjectWidget : public ProjectWidget
+class AbstractProjectWidget : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit AbstractProjectWidget(QWidget *parent, ProjectInfo *projectInfo);
+    explicit AbstractProjectWidget(QWidget *parent, AbstractProjectInfo *projectInfo);
     virtual ~AbstractProjectWidget();
 
-    ProjectInfo* projectInfo() const;
+    AbstractProjectInfo* projectInfo() const;
 
 private:
-    ProjectInfo *_projectInfo;
+    AbstractProjectInfo *_projectInfo;
     QLayout *layout;
     QLabel *nameLabel;
 

@@ -2,8 +2,8 @@
 #define MAINWINDOW_H
 
 #include "abstractprojectfactory.h"
-#include "projectinfo.h"
-#include "projectwidget.h"
+#include "abstractprojectinfo.h"
+#include "abstractprojectwidget.h"
 #include <QMainWindow>
 
 namespace Ui {
@@ -33,8 +33,8 @@ private slots:
 private:
     Ui::MainWindow *ui;
     AbstractProjectFactory::PROJECT_FACTORIES currentProject;
-    ProjectInfo *currentProjectInfo;
-    ProjectWidget *currentProjectWidget;
+    AbstractProjectInfo *currentProjectInfo;
+    AbstractProjectWidget *currentProjectWidget;
 };
 
 #endif // MAINWINDOW_H

@@ -2,8 +2,8 @@
 #include "ui_mainwindow.h"
 
 #include "abstractprojectfactory.h"
-#include "projectinfo.h"
-#include "projectwidget.h"
+#include "abstractprojectinfo.h"
+#include "abstractprojectwidget.h"
 #include "videoengine.h"
 
 #include <QCameraInfo>

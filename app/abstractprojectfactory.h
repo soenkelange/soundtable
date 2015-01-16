@@ -1,8 +1,8 @@
 #ifndef PROJECTFACTORY_H
 #define PROJECTFACTORY_H
 
-#include "projectinfo.h"
-#include "projectwidget.h"
+#include "abstractprojectinfo.h"
+#include "abstractprojectwidget.h"
 
 class AbstractProjectFactory
 {
@@ -15,9 +15,9 @@ public:
 
     virtual ~AbstractProjectFactory(){}
 
-    virtual ProjectInfo* createProjectInfo() = 0;
-    virtual ProjectWidget* createProjectWidget() = 0;
-    virtual ProjectWidget* createProjectWidget(QWidget *parent, ProjectInfo *projectInfo) = 0;
+    virtual AbstractProjectInfo* createProjectInfo() = 0;
+    virtual AbstractProjectWidget* createProjectWidget() = 0;
+    virtual AbstractProjectWidget* createProjectWidget(QWidget *parent, AbstractProjectInfo *projectInfo) = 0;
 
     static AbstractProjectFactory* createFactory(PROJECT_FACTORIES factory);
 };
