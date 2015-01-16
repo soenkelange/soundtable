@@ -18,15 +18,21 @@ SOURCES += main.cpp\
     b/projectbfactory.cpp \
     abstractprojectinfo.cpp \
     abstractprojectwidget.cpp \
-    abstractprojectfactory.cpp
+    abstractprojectfactory.cpp \
+    a/projectawidget.cpp \
+    b/projectbwidget.cpp
 
 HEADERS  += mainwindow.h \
     a/projectafactory.h \
     b/projectbfactory.h \
     abstractprojectinfo.h \
     abstractprojectwidget.h \
-    abstractprojectfactory.h
+    abstractprojectfactory.h \
+    a/projectawidget.h \
+    b/projectbwidget.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    a/projectawidget.ui \
+    b/projectbwidget.ui
 
 include(../libs/videoengine/videoengine.pri)
