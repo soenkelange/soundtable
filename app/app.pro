@@ -13,9 +13,21 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    a/projectafactory.cpp \
+    b/projectbfactory.cpp \
+    abstractprojectinfo.cpp \
+    abstractprojectwidget.cpp \
+    abstractprojectfactory.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    a/projectafactory.h \
+    b/projectbfactory.h \
+    projectinfo.h \
+    abstractprojectinfo.h \
+    projectwidget.h \
+    abstractprojectwidget.h \
+    abstractprojectfactory.h
 
 FORMS    += mainwindow.ui
 
