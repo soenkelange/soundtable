@@ -18,7 +18,8 @@ SOURCES += main.cpp\
     b/projectbfactory.cpp \
     abstractprojectinfo.cpp \
     abstractprojectwidget.cpp \
-    abstractprojectfactory.cpp
+    abstractprojectfactory.cpp \
+    b/card.cpp
 
 HEADERS  += mainwindow.h \
     a/projectafactory.h \
@@ -27,7 +28,8 @@ HEADERS  += mainwindow.h \
     abstractprojectinfo.h \
     projectwidget.h \
     abstractprojectwidget.h \
-    abstractprojectfactory.h
+    abstractprojectfactory.h \
+    b/card.h
 
 FORMS    += mainwindow.ui
 
