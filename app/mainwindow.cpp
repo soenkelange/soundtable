@@ -2,8 +2,8 @@
 #include "ui_mainwindow.h"
 
 #include "abstractprojectfactory.h"
-#include "projectinfo.h"
-#include "projectwidget.h"
+#include "abstractprojectinfo.h"
+#include "abstractprojectwidget.h"
 #include "videoengine.h"
 
 #include <QCameraInfo>
@@ -81,7 +81,7 @@ void MainWindow::changeProject(AbstractProjectFactory::PROJECT_FACTORIES newProj
     AbstractProjectFactory *factory = AbstractProjectFactory::createFactory(newProject);
     currentProject = newProject;
     currentProjectInfo = factory->createProjectInfo();
-    currentProjectWidget = factory->createProjectWidget();
+    currentProjectWidget = factory->createProjectWidget(this, currentProjectInfo);
     ui->stackedProjectsWidget->addWidget(currentProjectWidget);
     ui->stackedProjectsWidget->setCurrentWidget(currentProjectWidget);
 
@@ -103,7 +103,7 @@ void MainWindow::openCameraDevice(QAction *action) {
         return;
     }
     int device = qvariant_cast<int>(action->data());
-    qDebug() << "Select device " << device;
+    currentProjectWidget->handleOpenCamera(device);
 }
 
 void MainWindow::openFile() {
@@ -119,7 +119,7 @@ void MainWindow::openFile() {
     fileDialog.setFileMode(QFileDialog::ExistingFile);
     if(fileDialog.exec()) {
         QString fileName = fileDialog.selectedFiles().at(0);
-        qDebug() << "Open file " << fileName;
+        currentProjectWidget->handleOpenFile(fileName);
     }
 }
 

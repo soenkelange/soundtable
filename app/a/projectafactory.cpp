@@ -1,15 +1,19 @@
 #include "projectafactory.h"
 
 #include "abstractprojectinfo.h"
-#include "abstractprojectwidget.h"
+#include "a/projectawidget.h"
 
-ProjectInfo* ProjectAFactory::createProjectInfo()
+AbstractProjectInfo* ProjectAFactory::createProjectInfo()
 {
     return new AbstractProjectInfo("Project A");
 }
 
-ProjectWidget* ProjectAFactory::createProjectWidget()
+AbstractProjectWidget* ProjectAFactory::createProjectWidget()
 {
-   return new AbstractProjectWidget(0, "Project A");
+   return createProjectWidget(0, createProjectInfo());
+}
+
+AbstractProjectWidget* ProjectAFactory::createProjectWidget(QWidget *parent, AbstractProjectInfo *projectInfo) {
+    return new ProjectAWidget(parent, projectInfo);
 }
 

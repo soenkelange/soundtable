@@ -1,9 +1,9 @@
 #ifndef ABSTRACTPROJECTINFO_H
 #define ABSTRACTPROJECTINFO_H
 
-#include "projectinfo.h"
+#include <QString>
 
-class AbstractProjectInfo : public ProjectInfo
+class AbstractProjectInfo
 {
 
 public:
