@@ -2,20 +2,19 @@
 
 #include <QHBoxLayout>
 
-AbstractProjectWidget::AbstractProjectWidget(QWidget *parent, QString projectName) :
-    ProjectWidget(parent)
+AbstractProjectWidget::AbstractProjectWidget(QWidget *parent, AbstractProjectInfo *projectInfo) :
+    QWidget(parent)
 {
-    nameLabel = new QLabel(projectName);
-    nameLabel->setAlignment(Qt::AlignCenter);
-
-    layout = new QVBoxLayout;
-    layout->addWidget(nameLabel);
-    setLayout(layout);
-
+    _projectInfo = projectInfo;
 }
 
 AbstractProjectWidget::~AbstractProjectWidget()
 {
-    delete nameLabel;
-    delete layout;
 }
+
+AbstractProjectInfo* AbstractProjectWidget::projectInfo() const
+{
+    return _projectInfo;
+}
+
+
