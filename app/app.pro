@@ -24,7 +24,8 @@ SOURCES += main.cpp\
     b/card.cpp \
     b/widgets/videooutputtabwidget.cpp \
     b/widgets/videoplayercontrols.cpp \
-    b/widgets/settingstabwidget.cpp
+    b/widgets/settingstabwidget.cpp \
+    b/videoengine/videoplayer.cpp
 
 HEADERS  += mainwindow.h \
     a/projectafactory.h \
@@ -37,7 +38,8 @@ HEADERS  += mainwindow.h \
     b/card.h \
     b/widgets/videooutputtabwidget.h \
     b/widgets/videoplayercontrols.h \
-    b/widgets/settingstabwidget.h
+    b/widgets/settingstabwidget.h \
+    b/videoengine/videoplayer.h
 
 FORMS    += mainwindow.ui \
     a/projectawidget.ui \
