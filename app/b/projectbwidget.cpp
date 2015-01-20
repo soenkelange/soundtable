@@ -6,7 +6,7 @@ ProjectBWidget::ProjectBWidget(QWidget *parent, AbstractProjectInfo *projectInfo
     ui(new Ui::ProjectBWidget)
 {
     ui->setupUi(this);
-    ui->projectName->setText(projectInfo->name());
+    //ui->projectName->setText(projectInfo->name());
 }
 
 ProjectBWidget::~ProjectBWidget()
@@ -16,10 +16,10 @@ ProjectBWidget::~ProjectBWidget()
 
 bool ProjectBWidget::handleOpenCamera(int device)
 {
-    ui->selectedVideoInput->setText("Open device");
+    //ui->selectedVideoInput->setText("Open device");
     return true;
 }
 
 void ProjectBWidget::handleOpenFile(QString filePaht) {
-    ui->selectedVideoInput->setText("Open file");
+    //ui->selectedVideoInput->setText("Open file");
 }
