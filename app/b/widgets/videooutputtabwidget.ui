@@ -20,7 +20,7 @@
    <string>TabWidget</string>
   </property>
   <property name="currentIndex">
-   <number>0</number>
+   <number>1</number>
   </property>
   <widget class="QWidget" name="inputTab">
    <attribute name="title">
@@ -28,7 +28,7 @@
    </attribute>
    <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
-     <widget class="QLabel" name="inputVideoWidget">
+     <widget class="VideoWidget" name="inputVideoWidget">
       <property name="minimumSize">
        <size>
         <width>640</width>
@@ -39,7 +39,7 @@
        <enum>QFrame::Box</enum>
       </property>
       <property name="text">
-       <string>TextLabel</string>
+       <string/>
       </property>
      </widget>
     </item>
@@ -51,7 +51,7 @@
    </attribute>
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QLabel" name="outputVideoWidget">
+     <widget class="VideoWidget" name="outputVideoWidget">
       <property name="minimumSize">
        <size>
         <width>640</width>
@@ -62,13 +62,20 @@
        <enum>QFrame::Box</enum>
       </property>
       <property name="text">
-       <string>TextLabel</string>
+       <string/>
       </property>
      </widget>
     </item>
    </layout>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>VideoWidget</class>
+   <extends>QLabel</extends>
+   <header>videowidget.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
