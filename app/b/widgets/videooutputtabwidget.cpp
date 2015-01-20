@@ -12,3 +12,13 @@ VideoOutputTabWidget::~VideoOutputTabWidget()
 {
     delete ui;
 }
+
+VideoWidget* VideoOutputTabWidget::getInputWidget()
+{
+    return ui->inputVideoWidget;
+}
+
+VideoWidget* VideoOutputTabWidget::getOutputWidget()
+{
+    return ui->outputVideoWidget;
+}

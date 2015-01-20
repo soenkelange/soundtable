@@ -2,6 +2,7 @@
 #define VIDEOOUTPUTTABWIDGET_H
 
 #include <QTabWidget>
+#include "videowidget.h"
 
 namespace Ui {
 class VideoOutputTabWidget;
@@ -14,6 +15,9 @@ class VideoOutputTabWidget : public QTabWidget
 public:
     explicit VideoOutputTabWidget(QWidget *parent = 0);
     ~VideoOutputTabWidget();
+
+    VideoWidget* getInputWidget();
+    VideoWidget* getOutputWidget();
 
 private:
     Ui::VideoOutputTabWidget *ui;

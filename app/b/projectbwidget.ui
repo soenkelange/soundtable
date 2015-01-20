@@ -66,14 +66,14 @@
           <number>0</number>
          </property>
          <item>
-          <widget class="VideoOutputTabWidget" name="widget_3" native="true">
+          <widget class="VideoOutputTabWidget" name="videoOutputWidget" native="true">
            <property name="styleSheet">
             <string notr="true"/>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="VideoPlayerControls" name="widget_4" native="true">
+          <widget class="VideoPlayerControls" name="videoPlayerControls" native="true">
            <property name="styleSheet">
             <string notr="true"/>
            </property>
@@ -116,7 +116,7 @@
           <number>0</number>
          </property>
          <item>
-          <widget class="SettingsTabWidget" name="widget_5" native="true"/>
+          <widget class="SettingsTabWidget" name="settingsWidget" native="true"/>
          </item>
         </layout>
        </widget>
