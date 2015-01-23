@@ -28,7 +28,9 @@ SOURCES += main.cpp\
     b/soundengine/soundsource.cpp \
     b/soundengine/sound.cpp \
     b/soundengine/soundlistener.cpp \
-    b/soundengine/soundengine.cpp
+    b/soundengine/soundengine.cpp \
+    b/videoengine/card.cpp \
+    b/videoengine/cardsprocessor.cpp
 
 HEADERS  += mainwindow.h \
     a/projectafactory.h \
@@ -45,7 +47,9 @@ HEADERS  += mainwindow.h \
     b/soundengine/soundsource.h \
     b/soundengine/sound.h \
     b/soundengine/soundlistener.h \
-    b/soundengine/soundengine.h
+    b/soundengine/soundengine.h \
+    b/videoengine/card.h \
+    b/videoengine/cardsprocessor.h
 
 FORMS    += mainwindow.ui \
     a/projectawidget.ui \
