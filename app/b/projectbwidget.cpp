@@ -3,6 +3,8 @@
 
 #include <QDebug>
 #include "videoengine.h"
+#include <QFile>
+#include "soundengine/soundsource.h"
 
 ProjectBWidget::ProjectBWidget(QWidget *parent, AbstractProjectInfo *projectInfo) :
     AbstractProjectWidget(parent, projectInfo),
@@ -43,5 +45,8 @@ bool ProjectBWidget::handleOpenCamera(int device)
 }
 
 void ProjectBWidget::handleOpenFile(QString filePaht) {
+    SoundSource s(filePaht);
+    QString name = s.name();
+    qDebug() << "Path: " << s.path() << " Name: " << s.name() << " PlayLength: " << s.playLength();
     videoPlayer->setInput(filePaht);
 }

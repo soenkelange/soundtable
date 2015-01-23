@@ -25,7 +25,11 @@ SOURCES += main.cpp\
     b/widgets/videooutputtabwidget.cpp \
     b/widgets/videoplayercontrols.cpp \
     b/widgets/settingstabwidget.cpp \
-    b/videoengine/videoplayer.cpp
+    b/videoengine/videoplayer.cpp \
+    b/soundengine/soundsource.cpp \
+    b/soundengine/sound.cpp \
+    b/soundengine/soundlistener.cpp \
+    b/soundengine/soundengine.cpp
 
 HEADERS  += mainwindow.h \
     a/projectafactory.h \
@@ -39,7 +43,11 @@ HEADERS  += mainwindow.h \
     b/widgets/videooutputtabwidget.h \
     b/widgets/videoplayercontrols.h \
     b/widgets/settingstabwidget.h \
-    b/videoengine/videoplayer.h
+    b/videoengine/videoplayer.h \
+    b/soundengine/soundsource.h \
+    b/soundengine/sound.h \
+    b/soundengine/soundlistener.h \
+    b/soundengine/soundengine.h
 
 FORMS    += mainwindow.ui \
     a/projectawidget.ui \
