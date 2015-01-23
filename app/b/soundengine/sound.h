@@ -1,9 +1,10 @@
 #ifndef SOUND_H
 #define SOUND_H
-
+#include <irrKlang.h>
 #include "soundsource.h"
 #include <opencv2/opencv.hpp>
 
+using namespace irrklang;
 class Sound
 {
 public:
@@ -23,8 +24,10 @@ public:
     void setMaxDistance(float max);
     float playbackSpeed() const;
     void setPlaybackSpeed(float speed);
+    void setSound(ISound* sound);
 
 private:
+    ISound* _sound;
     SoundSource _soundSorce;
     float _volume;
     cv::Point3f _position;

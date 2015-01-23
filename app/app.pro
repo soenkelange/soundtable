@@ -57,3 +57,8 @@ FORMS    += mainwindow.ui \
     b/widgets/settingstabwidget.ui
 
 include(../libs/videoengine/videoengine.pri)
+
+unix:!macx: LIBS += -L$$PWD/../../irrklang/bin/linux-gcc-64/ -lIrrKlang
+
+INCLUDEPATH += $$PWD/../../irrklang/include
+DEPENDPATH += $$PWD/../../irrklang/include

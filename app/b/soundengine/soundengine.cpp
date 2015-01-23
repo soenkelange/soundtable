@@ -13,6 +13,8 @@ SoundEngine::~SoundEngine()
 
 void SoundEngine::play(const Sound &sound)
 {
+    _sound = engine->play3D(sound.getSoundSource(),Sound.position(), Sound.isLooped(), false, true);
+    sound.setSound(_sound);
 
 }
 
@@ -40,4 +42,5 @@ float SoundEngine::masterVolume() const
 void SoundEngine::setMasterVolume(float volume)
 {
     _masterVolume = volume;
+    engine->setSoundVolume(_masterVolume);
 }

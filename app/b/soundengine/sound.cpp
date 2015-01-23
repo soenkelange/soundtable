@@ -15,6 +15,10 @@ Sound::~Sound()
 {
 
 }
+void setSound(ISound* sound)
+{
+    _sound = sound;
+}
 
 SoundSource Sound::getSoundSource() const
 {
@@ -29,6 +33,8 @@ float Sound::volume() const
 void Sound::setVolume(float volume)
 {
     _volume = volume;
+    _sound->setVolume(_volume);
+
 }
 
 cv::Point3f Sound::position() const
@@ -39,6 +45,7 @@ cv::Point3f Sound::position() const
 void Sound::setPosition(cv::Point3f position)
 {
     _position = position;
+    _sound->setPosition(_position);
 }
 
 bool Sound::isLooped() const
@@ -49,6 +56,7 @@ bool Sound::isLooped() const
 void Sound::setIsLooped(bool looped)
 {
     _looped = looped;
+    _sound->setIsLooped(_looped);
 }
 
 float Sound::minDistance() const
@@ -59,6 +67,7 @@ float Sound::minDistance() const
 void Sound::setMinDistance(float min)
 {
     _minDistance = min;
+    _sound->setMinDistance(_minDistance);
 }
 
 float Sound::maxDistance() const
@@ -69,6 +78,7 @@ float Sound::maxDistance() const
 void Sound::setMaxDistance(float max)
 {
     _maxDistance = max;
+    _sound->setMaxDistance(_maxDistance);
 }
 
 float Sound::playbackSpeed() const
@@ -79,4 +89,5 @@ float Sound::playbackSpeed() const
 void Sound::setPlaybackSpeed(float speed)
 {
     _playbackSpeed = speed;
+    _sound->setPlaybackSpeed(_playbackSpeed);
 }

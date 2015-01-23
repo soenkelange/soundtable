@@ -1,6 +1,6 @@
 #ifndef SOUNDENGINE_H
 #define SOUNDENGINE_H
-
+#include <irrKlang.h>
 #include "soundlistener.h"
 #include "sound.h"
 #include "soundsource.h"
@@ -8,6 +8,7 @@
 #include <QStringList>
 #include <QSet>
 
+using namespace irrklang;
 class SoundEngine
 {
 public:
@@ -24,9 +25,11 @@ public:
     void setMasterVolume(float volume);
 
 private:
+    ISoundEngine* engine = createIrrKlangDevice();
     QSet<SoundSource> _soundSources;
     SoundListener _listener;
     float _masterVolume;
+    ISound* _sound;
 };
 
 #endif // SOUNDENGINE_H
