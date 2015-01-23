@@ -21,7 +21,6 @@ SOURCES += main.cpp\
     abstractprojectfactory.cpp \
     a/projectawidget.cpp \
     b/projectbwidget.cpp \
-    b/card.cpp \
     b/widgets/videooutputtabwidget.cpp \
     b/widgets/videoplayercontrols.cpp \
     b/widgets/settingstabwidget.cpp \
@@ -39,7 +38,6 @@ HEADERS  += mainwindow.h \
     abstractprojectfactory.h \
     a/projectawidget.h \
     b/projectbwidget.h \
-    b/card.h \
     b/widgets/videooutputtabwidget.h \
     b/widgets/videoplayercontrols.h \
     b/widgets/settingstabwidget.h \
