@@ -41,7 +41,7 @@ void VideoPlayer::setOutputVideoWidget(VideoWidget *widget)
 
 void VideoPlayer::setVideoProcessor(VideoProcessor *processor)
 {
-    _videoEngine->setProcessor(*processor);
+    _videoEngine->setProcessor(processor);
 }
 
 VideoPlayer::State VideoPlayer::state() const
