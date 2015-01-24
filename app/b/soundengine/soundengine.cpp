@@ -13,7 +13,7 @@ SoundEngine::~SoundEngine()
 
 void SoundEngine::play(Sound &sound )
 {
-    ISound* _sound = _engine->play3D("sound.getSoundSource().path()", sound.position(), sound.isLooped(), false, true);
+    ISound* _sound = _engine->play3D(sound.getSoundSource().path().toUtf8().constData(), sound.position(), sound.isLooped(), false, true);
     sound.setSound(_sound);
 
 }
@@ -58,7 +58,7 @@ void SoundEngine::setMasterVolume(float volume)
         volume = 1;
     }else if(volume <0)
     {
-        voulume = 0;
+        volume = 0;
     }
     _masterVolume = volume;
     _engine->setSoundVolume(_masterVolume);
