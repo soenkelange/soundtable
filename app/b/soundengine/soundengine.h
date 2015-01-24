@@ -25,11 +25,16 @@ public:
     void setMasterVolume(float volume);
 
 private:
-    ISoundEngine* _engine = createIrrKlangDevice();
     QSet<SoundSource> _soundSources;
     SoundListener _listener;
     float _masterVolume;
-    ISound* _sound;
+
+    /*
+     * Variablen hier dunter habe ich hinzugefügt.
+     * Management für die einzelnen Soundklassen fehlt
+     */
+
+    static ISoundEngine* _engine = createIrrKlangDevice();
 };
 
 #endif // SOUNDENGINE_H

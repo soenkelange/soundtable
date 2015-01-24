@@ -16,12 +16,6 @@ public:
     cv::Point3f upVector() const;
     void setUpVector(cv::Point3f upVector);
 
-    /*
-     * Funtkionen hier drunter habe ich gemacht
-     */
-
-    void setListenerPosition();
-
 private:
     cv::Point3f _position;
     cv::Point3f _lookDirection;

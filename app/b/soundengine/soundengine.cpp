@@ -13,9 +13,8 @@ SoundEngine::~SoundEngine()
 
 void SoundEngine::play(const Sound &sound)
 {
-    _sound = _engine->play3D(sound.getSoundSource(),Sound.position(), Sound.isLooped(), false, true);
+    ISound* _sound = _engine->play3D(sound.getSoundSource().path(),sound.position(), sound.isLooped(), false, true);
     sound.setSound(_sound);
-    sound.Sound(_soundSources.begin());
 
 }
 
