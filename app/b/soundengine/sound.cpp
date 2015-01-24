@@ -15,9 +15,9 @@ Sound::~Sound()
 {
 
 }
-void setSound(ISound* sound)
+void Sound::setSound(ISound* sound)
 {
-    _sound = sound;
+     _sound = sound;
 }
 
 SoundSource Sound::getSoundSource() const

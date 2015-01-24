@@ -1,9 +1,9 @@
 #ifndef SOUNDLISTENER_H
 #define SOUNDLISTENER_H
-
+#include "soundengine.h"
 #include <opencv2/opencv.hpp>
 
-class SoundListener
+class SoundListener : public SoundEngine
 {
 public:
     SoundListener();
@@ -15,6 +15,12 @@ public:
     void setLookDirection(cv::Point3f direction);
     cv::Point3f upVector() const;
     void setUpVector(cv::Point3f upVector);
+
+    /*
+     * Funtkionen hier drunter habe ich gemacht
+     */
+
+    void setListenerPosition();
 
 private:
     cv::Point3f _position;

@@ -25,7 +25,7 @@ public:
     void setMasterVolume(float volume);
 
 private:
-    ISoundEngine* engine = createIrrKlangDevice();
+    ISoundEngine* _engine = createIrrKlangDevice();
     QSet<SoundSource> _soundSources;
     SoundListener _listener;
     float _masterVolume;

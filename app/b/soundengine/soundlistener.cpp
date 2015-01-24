@@ -19,6 +19,7 @@ cv::Point3f SoundListener::position() const
 void SoundListener::setPosition(cv::Point3f position)
 {
     _position = position;
+
 }
 
 cv::Point3f SoundListener::lookDirection() const
@@ -39,5 +40,10 @@ cv::Point3f SoundListener::upVector() const
 void SoundListener::setUpVector(cv::Point3f upVector)
 {
     _upVector = upVector;
+}
+
+void SoundListener::setListenerPosition()
+{
+    _engine->setListenerPosition(_position, _lookDirection, _upVector);
 }
 

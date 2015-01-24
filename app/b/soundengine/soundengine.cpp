@@ -13,12 +13,15 @@ SoundEngine::~SoundEngine()
 
 void SoundEngine::play(const Sound &sound)
 {
-    _sound = engine->play3D(sound.getSoundSource(),Sound.position(), Sound.isLooped(), false, true);
+    _sound = _engine->play3D(sound.getSoundSource(),Sound.position(), Sound.isLooped(), false, true);
     sound.setSound(_sound);
+    sound.Sound(_soundSources.begin());
 
 }
 
-void SoundEngine::load(const QString &fileName) {
+void SoundEngine::load(const QString &fileName)
+{
+
 
 }
 
