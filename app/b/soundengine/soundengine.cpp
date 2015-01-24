@@ -11,17 +11,27 @@ SoundEngine::~SoundEngine()
 
 }
 
-void SoundEngine::play(const Sound &sound)
+void SoundEngine::play(Sound &sound )
 {
-    ISound* _sound = _engine->play3D(sound.getSoundSource().path(),sound.position(), sound.isLooped(), false, true);
+    ISound* _sound = _engine->play3D("sound.getSoundSource().path()", sound.position(), sound.isLooped(), false, true);
     sound.setSound(_sound);
 
 }
 
+
 void SoundEngine::load(const QString &fileName)
 {
+    SoundSource soundSource(fileName);
 
+    ISoundSource *iSoundSource =_engine->addSoundSourceFromFile(fileName.toLocal8Bit().constData(),ESM_AUTO_DETECT);
+    soundSource.setSoundSource(iSoundSource);
+    _soundSources.append(soundSource);
 
+}
+
+QList<SoundSource> SoundEngine::getSoundSources()
+{
+    return _soundSources;
 }
 
 void SoundEngine::load(const QStringList &fileNames)
@@ -31,7 +41,7 @@ void SoundEngine::load(const QStringList &fileNames)
     }
 }
 
-SoundListener SoundEngine::soundListener() const
+SoundListener* SoundEngine::soundListener()
 {
     return _listener;
 }
@@ -44,5 +54,5 @@ float SoundEngine::masterVolume() const
 void SoundEngine::setMasterVolume(float volume)
 {
     _masterVolume = volume;
-    engine->setSoundVolume(_masterVolume);
+    _engine->setSoundVolume(_masterVolume);
 }

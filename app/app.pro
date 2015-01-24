@@ -46,7 +46,6 @@ HEADERS  += mainwindow.h \
     b/videoengine/videoplayer.h \
     b/soundengine/soundsource.h \
     b/soundengine/sound.h \
-    b/soundengine/soundlistener.h \
     b/soundengine/soundengine.h
 
 FORMS    += mainwindow.ui \

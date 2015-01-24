@@ -1,9 +1,10 @@
 #include "sound.h"
 
-Sound::Sound(const SoundSource &source) :
+Sound::Sound(const SoundSource &source):
+
     _soundSorce(source),
-    _volume(100),
-    _position(cv::Point3f(0,0,0)),
+    _volume(1),
+    _position(vec3df(0,0,0)),
     _looped(false),
     _minDistance(0),
     _maxDistance(100),
@@ -32,19 +33,27 @@ float Sound::volume() const
 
 void Sound::setVolume(float volume)
 {
+    if(volume > 1)
+    {
+        volume = 1;
+    }else if(volume < 0)
+    {
+        volume = 0;
+    }
     _volume = volume;
     _sound->setVolume(_volume);
 
 }
 
-cv::Point3f Sound::position() const
+vec3df Sound::position() const
 {
     return _position;
 }
 
 void Sound::setPosition(cv::Point3f position)
 {
-    _position = position;
+    _position = vec3df(position.x, position.y, position.z);
+
     _sound->setPosition(_position);
 }
 
@@ -90,4 +99,14 @@ void Sound::setPlaybackSpeed(float speed)
 {
     _playbackSpeed = speed;
     _sound->setPlaybackSpeed(_playbackSpeed);
+}
+
+void Sound::stopSound()
+{
+    _sound->stop();
+}
+
+void Sound::dropSound()
+{
+    _sound->drop();
 }

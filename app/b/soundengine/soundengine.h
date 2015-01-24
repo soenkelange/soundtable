@@ -1,7 +1,7 @@
 #ifndef SOUNDENGINE_H
 #define SOUNDENGINE_H
 #include <irrKlang.h>
-#include "soundlistener.h"
+
 #include "sound.h"
 #include "soundsource.h"
 #include <QString>
@@ -11,30 +11,45 @@
 using namespace irrklang;
 class SoundEngine
 {
+private:
+    class SoundListener *_listener;
+
 public:
     SoundEngine();
     ~SoundEngine();
 
-    void play(const Sound &sound);
+    void play(Sound &sound);
     void load(const QString &fileName);
     void load(const QStringList &fileNames);
 
-    SoundListener soundListener() const;
+    SoundListener* soundListener();
 
     float masterVolume() const;
     void setMasterVolume(float volume);
+    QList<SoundSource>  getSoundSources();
 
 private:
-    QSet<SoundSource> _soundSources;
-    SoundListener _listener;
+    QList<SoundSource> _soundSources;
     float _masterVolume;
+    ISoundEngine* _engine = createIrrKlangDevice();
+};
 
-    /*
-     * Variablen hier dunter habe ich hinzugefügt.
-     * Management für die einzelnen Soundklassen fehlt
-     */
+class SoundListener
+{
+public:
+    SoundListener(ISoundEngine* engine);
+    ~SoundListener();
 
-    static ISoundEngine* _engine = createIrrKlangDevice();
+    vec3df position() const;
+    void setPosition(cv::Point3f position);
+    vec3df lookDirection() const;
+    void setLookDirection(cv::Point3f direction);
+    vec3df upVector() const;
+    void setUpVector(cv::Point3f upVector);private:
+    vec3df _position = vec3df(0,0,0);
+    vec3df _lookDirection = vec3df(0,0,0);
+    vec3df _upVector = vec3df(0,0,1);
+    ISoundEngine* _engine;
 };
 
 #endif // SOUNDENGINE_H

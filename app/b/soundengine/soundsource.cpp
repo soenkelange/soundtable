@@ -26,3 +26,7 @@ int SoundSource::playLength() const
     return -1;
 }
 
+void SoundSource::setSoundSource(ISoundSource *soundSource)
+{
+    _soundSource = soundSource;
+}

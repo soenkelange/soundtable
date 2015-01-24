@@ -14,7 +14,7 @@ public:
     SoundSource getSoundSource() const;
     float volume() const;
     void setVolume(float volume);
-    cv::Point3f position() const;
+   vec3df position() const;
     void setPosition(cv::Point3f position);
     bool isLooped() const;
     void setIsLooped(bool looped);
@@ -25,12 +25,14 @@ public:
     float playbackSpeed() const;
     void setPlaybackSpeed(float speed);
     void setSound(ISound* sound);
+    void stopSound();
+    void dropSound();
 
 private:
     ISound* _sound;
     SoundSource _soundSorce;
     float _volume;
-    cv::Point3f _position;
+    vec3df _position;
     bool _looped;
     float _minDistance;
     float _maxDistance;
