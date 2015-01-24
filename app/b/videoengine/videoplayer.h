@@ -4,6 +4,7 @@
 #include <QObject>
 #include "videoengine.h"
 #include "videowidget.h"
+#include "videoprocessor.h"
 
 class VideoPlayer : public QObject
 {
@@ -21,6 +22,7 @@ public:
     bool setInput(int cameraDevice);
     void setInputVideoWidget(VideoWidget *widget);
     void setOutputVideoWidget(VideoWidget *widget);
+    void setVideoProcessor(VideoProcessor *processor);
 
     VideoPlayer::State state() const;
 
