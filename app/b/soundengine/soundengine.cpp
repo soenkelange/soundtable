@@ -53,6 +53,13 @@ float SoundEngine::masterVolume() const
 
 void SoundEngine::setMasterVolume(float volume)
 {
+    if(volume >1)
+    {
+        volume = 1;
+    }else if(volume <0)
+    {
+        voulume = 0;
+    }
     _masterVolume = volume;
     _engine->setSoundVolume(_masterVolume);
 }
