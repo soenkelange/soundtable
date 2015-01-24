@@ -15,6 +15,9 @@ ProjectBWidget::ProjectBWidget(QWidget *parent, AbstractProjectInfo *projectInfo
 
     setupVideoPlayerConnection();
 
+    // REMOVE - BEGIN
+    dirtyHack();
+    // REMOVE - END
 }
 
 ProjectBWidget::~ProjectBWidget()
@@ -22,6 +25,15 @@ ProjectBWidget::~ProjectBWidget()
     delete videoPlayer;
     delete ui;
 }
+
+// REMOVE - BEGIN
+void ProjectBWidget::dirtyHack()
+{
+    QString testFile = "/Users/soenkelange/ownCloud/AVPRG/Testvideos/out.mpeg";
+    handleOpenFile(testFile);
+    videoPlayer->play();
+}
+// REMOVE - END
 
 void ProjectBWidget::setupVideoPlayerConnection()
 {
