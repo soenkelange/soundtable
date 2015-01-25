@@ -1,32 +1,44 @@
 #ifndef SOUNDENGINE_H
 #define SOUNDENGINE_H
+#include <irrKlang.h>
 
-#include "soundlistener.h"
 #include "sound.h"
 #include "soundsource.h"
 #include <QString>
 #include <QStringList>
 #include <QSet>
+#include <irrKlang.h>
+#include "soundlistener.h"
 
-class SoundEngine
+class SoundEngine : public SoundListenerEventListener
 {
+
 public:
     SoundEngine();
     ~SoundEngine();
 
-    void play(const Sound &sound);
-    void load(const QString &fileName);
-    void load(const QStringList &fileNames);
+    Sound* play(SoundSource *source, const irrklang::vec3df &postion, bool looped = false);
 
-    SoundListener soundListener() const;
+    SoundSource* load(const QString &fileName);
+    QList<SoundSource*> load(const QStringList &fileNames);
+    QList<SoundSource*> getSoundSources();
+
+    SoundListener* soundListener();
+    void positionChanged();
+    void lookDirectionChanged();
+    void upVectorChanged();
 
     float masterVolume() const;
     void setMasterVolume(float volume);
 
+protected:
+    void updateListenerPosition();
+
 private:
-    QSet<SoundSource> _soundSources;
-    SoundListener _listener;
-    float _masterVolume;
+    irrklang::ISoundEngine *_engine;
+    SoundListener *_listener;
+    QList<SoundSource*> _soundSources;
+
 };
 
 #endif // SOUNDENGINE_H

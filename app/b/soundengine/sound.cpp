@@ -1,13 +1,7 @@
 #include "sound.h"
 
-Sound::Sound(const SoundSource &source) :
-    _soundSorce(source),
-    _volume(100),
-    _position(cv::Point3f(0,0,0)),
-    _looped(false),
-    _minDistance(0),
-    _maxDistance(100),
-    _playbackSpeed(1)
+Sound::Sound(irrklang::ISound *sound) :
+    _sound(sound)
 {
 }
 
@@ -16,67 +10,62 @@ Sound::~Sound()
 
 }
 
-SoundSource Sound::getSoundSource() const
-{
-    return _soundSorce;
-}
-
 float Sound::volume() const
 {
-    return _volume;
+    return _sound->getVolume();
 }
 
 void Sound::setVolume(float volume)
 {
-    _volume = volume;
+    _sound->setVolume(volume);
 }
 
-cv::Point3f Sound::position() const
+irrklang::vec3df Sound::position() const
 {
-    return _position;
+    return _sound->getPosition();
 }
 
-void Sound::setPosition(cv::Point3f position)
+void Sound::setPosition(irrklang::vec3df position)
 {
-    _position = position;
+    _sound->setPosition(position);
 }
 
 bool Sound::isLooped() const
 {
-    return _looped;
+    return _sound->isLooped();
 }
 
 void Sound::setIsLooped(bool looped)
 {
-    _looped = looped;
+    _sound->setIsLooped(looped);
 }
 
 float Sound::minDistance() const
 {
-    return _minDistance;
+    return _sound->getMinDistance();
 }
 
 void Sound::setMinDistance(float min)
 {
-    _minDistance = min;
-}
-
-float Sound::maxDistance() const
-{
-    return _maxDistance;
-}
-
-void Sound::setMaxDistance(float max)
-{
-    _maxDistance = max;
+    _sound->setMinDistance(min);
 }
 
 float Sound::playbackSpeed() const
 {
-    return _playbackSpeed;
+    return _sound->getPlaybackSpeed();
 }
 
 void Sound::setPlaybackSpeed(float speed)
 {
-    _playbackSpeed = speed;
+    _sound->setPlaybackSpeed(speed);
+}
+
+void Sound::stop()
+{
+    _sound->stop();
+}
+
+void Sound::drop()
+{
+    _sound->drop();
 }

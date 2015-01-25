@@ -62,3 +62,10 @@ FORMS    += mainwindow.ui \
     b/widgets/cardsprocessorsettings.ui
 
 include(../libs/videoengine/videoengine.pri)
+
+
+
+unix: LIBS += -L$$PWD/../../irrKlang/bin/macosx-gcc/ -lirrklang
+
+INCLUDEPATH += $$PWD/../../irrKlang/include
+DEPENDPATH += $$PWD/../../irrKlang/include

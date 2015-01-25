@@ -1,25 +1,41 @@
 #ifndef SOUNDLISTENER_H
 #define SOUNDLISTENER_H
 
-#include <opencv2/opencv.hpp>
+#include <irrKlang.h>
 
 class SoundListener
 {
-public:
-    SoundListener();
-    ~SoundListener();
-
-    cv::Point3f position() const;
-    void setPosition(cv::Point3f position);
-    cv::Point3f lookDirection() const;
-    void setLookDirection(cv::Point3f direction);
-    cv::Point3f upVector() const;
-    void setUpVector(cv::Point3f upVector);
 
 private:
-    cv::Point3f _position;
-    cv::Point3f _lookDirection;
-    cv::Point3f _upVector;
+    class SoundListenerEventListener *_listener;
+
+public:
+    SoundListener(SoundListenerEventListener *listener);
+    ~SoundListener();
+
+    irrklang::vec3df position() const;
+    void setPosition(irrklang::vec3df position);
+    irrklang::vec3df lookDirection() const;
+    void setLookDirection(irrklang::vec3df direction);
+    irrklang::vec3df upVector() const;
+    void setUpVector(irrklang::vec3df upVector);private:
+
+private:
+    irrklang::vec3df _position;
+    irrklang::vec3df _lookDirection;
+    irrklang::vec3df _upVector;
+
+};
+
+class SoundListenerEventListener
+{
+public:
+    virtual ~SoundListenerEventListener() {}
+    virtual void positionChanged() = 0;
+    virtual void lookDirectionChanged() = 0;
+    virtual void upVectorChanged() = 0;
+
 };
 
 #endif // SOUNDLISTENER_H
+
