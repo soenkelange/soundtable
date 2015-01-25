@@ -1,49 +1,54 @@
-#include "soundengine.h"
+#include "soundlistener.h"
 
-SoundListener::SoundListener(ISoundEngine* engine) :
-    _position(vec3df(0,0,0))
-
+SoundListener::SoundListener(SoundListenerEventListener *listener) :
+    _position(irrklang::vec3df(0,0,0)),
+    _lookDirection(1,0,0),
+    _listener(listener),
+    _upVector(0,0,1)
 {
-      _engine = engine;
 }
 
 SoundListener::~SoundListener()
 {
-
 }
 
-vec3df SoundListener::position() const
+irrklang::vec3df SoundListener::position() const
 {
     return _position;
 }
 
-void SoundListener::setPosition(cv::Point3f position)
+void SoundListener::setPosition(irrklang::vec3df position)
 {
-    _position = vec3df(position.x, position.y, position.z);
-    _engine->setListenerPosition(_position, _lookDirection, _upVector);
-
+    if (position != _position) {
+        _position = position;
+        _listener->positionChanged();
+    }
 }
 
-vec3df SoundListener::lookDirection() const
+irrklang::vec3df SoundListener::lookDirection() const
 {
     return _lookDirection;
 }
 
-void SoundListener::setLookDirection(cv::Point3f direction)
+void SoundListener::setLookDirection(irrklang::vec3df direction)
 {
-    _lookDirection = vec3df(direction.x, direction.y, direction.z);
-    _engine->setListenerPosition(_position, _lookDirection, _upVector);
+    if (direction != _lookDirection) {
+        _lookDirection = direction;
+        _listener->lookDirectionChanged();
+    }
 }
 
-vec3df SoundListener::upVector() const
+irrklang::vec3df SoundListener::upVector() const
 {
     return _upVector;
 }
 
-void SoundListener::setUpVector(cv::Point3f upVector)
+void SoundListener::setUpVector(irrklang::vec3df upVector)
 {
-    _upVector = vec3df(upVector.x, upVector.y, upVector.z);
-    _engine->setListenerPosition(_position, _lookDirection, _upVector);
+    if (upVector!= _upVector) {
+        _upVector = upVector;
+        _listener->upVectorChanged();
+    }
 }
 
 

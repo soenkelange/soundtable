@@ -1,6 +1,7 @@
 #include "soundsource.h"
 
-SoundSource::SoundSource(QString fileName)
+SoundSource::SoundSource(irrklang::ISoundSource *source, QString fileName) :
+    _soundSource(source)
 {
     fileInfo = new QFileInfo(fileName);
     _name = fileInfo->baseName();
@@ -26,7 +27,7 @@ int SoundSource::playLength() const
     return -1;
 }
 
-void SoundSource::setSoundSource(ISoundSource *soundSource)
+irrklang::ISoundSource* SoundSource::soundSource() const
 {
-    _soundSource = soundSource;
+    return _soundSource;
 }

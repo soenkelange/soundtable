@@ -7,49 +7,38 @@
 #include <QString>
 #include <QStringList>
 #include <QSet>
+#include <irrKlang.h>
+#include "soundlistener.h"
 
-using namespace irrklang;
-class SoundEngine
+class SoundEngine : public SoundListenerEventListener
 {
-private:
-    class SoundListener *_listener;
 
 public:
     SoundEngine();
     ~SoundEngine();
 
-    void play(Sound &sound);
-    void load(const QString &fileName);
-    void load(const QStringList &fileNames);
+    Sound* play(SoundSource *source, const irrklang::vec3df &postion, bool looped = false);
+
+    SoundSource* load(const QString &fileName);
+    QList<SoundSource*> load(const QStringList &fileNames);
+    QList<SoundSource*> getSoundSources();
 
     SoundListener* soundListener();
+    void positionChanged();
+    void lookDirectionChanged();
+    void upVectorChanged();
 
     float masterVolume() const;
     void setMasterVolume(float volume);
-    QList<SoundSource>  getSoundSources();
+
+protected:
+    void updateListenerPosition();
 
 private:
-    QList<SoundSource> _soundSources;
-    float _masterVolume;
-    ISoundEngine* _engine = createIrrKlangDevice();
-};
+    irrklang::ISoundEngine *_engine;
+    SoundListener *_listener;
+    QList<SoundSource*> _soundSources;
 
-class SoundListener
-{
-public:
-    SoundListener(ISoundEngine* engine);
-    ~SoundListener();
-
-    vec3df position() const;
-    void setPosition(cv::Point3f position);
-    vec3df lookDirection() const;
-    void setLookDirection(cv::Point3f direction);
-    vec3df upVector() const;
-    void setUpVector(cv::Point3f upVector);private:
-    vec3df _position = vec3df(0,0,0);
-    vec3df _lookDirection = vec3df(0,0,0);
-    vec3df _upVector = vec3df(0,0,1);
-    ISoundEngine* _engine;
 };
 
 #endif // SOUNDENGINE_H

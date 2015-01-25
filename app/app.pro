@@ -46,7 +46,8 @@ HEADERS  += mainwindow.h \
     b/videoengine/videoplayer.h \
     b/soundengine/soundsource.h \
     b/soundengine/sound.h \
-    b/soundengine/soundengine.h
+    b/soundengine/soundengine.h \
+    b/soundengine/soundlistener.h
 
 FORMS    += mainwindow.ui \
     a/projectawidget.ui \
@@ -57,7 +58,9 @@ FORMS    += mainwindow.ui \
 
 include(../libs/videoengine/videoengine.pri)
 
-unix:!macx: LIBS += -L$$PWD/../../irrklang/bin/linux-gcc-64/ -lIrrKlang
 
-INCLUDEPATH += $$PWD/../../irrklang/include
-DEPENDPATH += $$PWD/../../irrklang/include
+
+unix: LIBS += -L$$PWD/../../irrKlang/bin/macosx-gcc/ -lirrklang
+
+INCLUDEPATH += $$PWD/../../irrKlang/include
+DEPENDPATH += $$PWD/../../irrKlang/include

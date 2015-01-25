@@ -1,42 +1,33 @@
 #ifndef SOUND_H
 #define SOUND_H
-#include <irrKlang.h>
+
 #include "soundsource.h"
 #include <opencv2/opencv.hpp>
+#include <irrKlang.h>
 
-using namespace irrklang;
+
 class Sound
 {
 public:
-    Sound(const SoundSource &source);
+    Sound(irrklang::ISound *sound);
     ~Sound();
 
-    SoundSource getSoundSource() const;
     float volume() const;
     void setVolume(float volume);
-   vec3df position() const;
-    void setPosition(cv::Point3f position);
+    irrklang::vec3df position() const;
+    void setPosition(irrklang::vec3df position);
     bool isLooped() const;
     void setIsLooped(bool looped);
     float minDistance() const;
     void setMinDistance(float min);
-    float maxDistance() const;
-    void setMaxDistance(float max);
     float playbackSpeed() const;
     void setPlaybackSpeed(float speed);
-    void setSound(ISound* sound);
-    void stopSound();
-    void dropSound();
+    void stop();
+    void drop();
 
 private:
-    ISound* _sound;
-    SoundSource _soundSorce;
-    float _volume;
-    vec3df _position;
-    bool _looped;
-    float _minDistance;
-    float _maxDistance;
-    float _playbackSpeed;
+    irrklang::ISound* _sound;
+
 };
 
 #endif // SOUND_H

@@ -1,44 +1,54 @@
 #include "soundengine.h"
 
+#include <QDebug>
+#include <irrKlang.h>
 
-SoundEngine::SoundEngine()
+SoundEngine::SoundEngine() :
+    _engine(irrklang::createIrrKlangDevice()),
+    _soundSources()
 {
-
+    _listener = new SoundListener(this);
+    qDebug() << _engine->isMultiThreaded();
 }
 
 SoundEngine::~SoundEngine()
 {
-
+    _engine->drop();
+    delete _listener;
 }
 
-void SoundEngine::play(Sound &sound )
+Sound* SoundEngine::play(SoundSource *source, const irrklang::vec3df &postion, bool looped)
 {
-    ISound* _sound = _engine->play3D(sound.getSoundSource().path().toUtf8().constData(), sound.position(), sound.isLooped(), false, true);
-    sound.setSound(_sound);
+    irrklang::ISound *iSound = _engine->play3D(source->soundSource(), postion, looped, false, true);
+    Sound *sound = new Sound(iSound);
 
+    qDebug() << "Play " << source->name();
+    return sound;
 }
 
-
-void SoundEngine::load(const QString &fileName)
+SoundSource* SoundEngine::load(const QString &fileName)
 {
-    SoundSource soundSource(fileName);
-
-    ISoundSource *iSoundSource =_engine->addSoundSourceFromFile(fileName.toLocal8Bit().constData(),ESM_AUTO_DETECT);
-    soundSource.setSoundSource(iSoundSource);
+    irrklang::ISoundSource *source =_engine->addSoundSourceFromFile(
+                fileName.toLocal8Bit().constData(), irrklang::ESM_AUTO_DETECT);
+    SoundSource *soundSource = new SoundSource(source, fileName);
     _soundSources.append(soundSource);
-
+    qDebug() << "Loaded " << soundSource->name();
+    return soundSource;
 }
 
-QList<SoundSource> SoundEngine::getSoundSources()
+QList<SoundSource*> SoundEngine::load(const QStringList &fileNames)
+{
+    QList<SoundSource*> loadedSources;
+    for(int i = 0; i <= fileNames.size(); i++) {
+        SoundSource *source = load(fileNames.at(i));
+        loadedSources.append(source);
+    }
+    return loadedSources;
+}
+
+QList<SoundSource *> SoundEngine::getSoundSources()
 {
     return _soundSources;
-}
-
-void SoundEngine::load(const QStringList &fileNames)
-{
-    for(int i = 0; i <= fileNames.size(); i++) {
-        load(fileNames.at(i));
-    }
 }
 
 SoundListener* SoundEngine::soundListener()
@@ -46,20 +56,33 @@ SoundListener* SoundEngine::soundListener()
     return _listener;
 }
 
+void SoundEngine::positionChanged()
+{
+    updateListenerPosition();
+}
+
+void SoundEngine::lookDirectionChanged()
+{
+    updateListenerPosition();
+}
+
+void SoundEngine::upVectorChanged()
+{
+    updateListenerPosition();
+}
+
+void SoundEngine::updateListenerPosition()
+{
+    _engine->setListenerPosition(_listener->position(), _listener->lookDirection(),
+                                 irrklang::vec3df(0,0,0), _listener->upVector());
+}
+
 float SoundEngine::masterVolume() const
 {
-    return _masterVolume;
+    return _engine->getSoundVolume();
 }
 
 void SoundEngine::setMasterVolume(float volume)
 {
-    if(volume >1)
-    {
-        volume = 1;
-    }else if(volume <0)
-    {
-        volume = 0;
-    }
-    _masterVolume = volume;
-    _engine->setSoundVolume(_masterVolume);
+    _engine->setSoundVolume(volume);
 }
