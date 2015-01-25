@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <opencv2/opencv.hpp>
+#include <QDebug>
 
 class Card
 {
@@ -29,13 +30,18 @@ public:
     ~Card();
 
     Card::Color color() const;
+    cv::Scalar colorAsScalar() const;
+    QString colorName() const;
     Card::Shape shape() const;
+    QString shapeName() const;
     cv::Point2f position() const;
     void setPosition(cv::Point2f position);
     float rotation() const;
     void setRotation(float rotation);
     bool isVisible() const;
     void setVisibility(bool visible);
+    bool isDetected() const;
+    void setDetected(bool detected);
 
     void setListener(CardEventListener *listener);
     void removeListener();
@@ -46,8 +52,10 @@ private:
     cv::Point2f _position;
     float _rotation;
     bool _visible;
+    bool _detected;
 
 };
+QDebug operator<< ( QDebug debug, const Card &card);
 
 class CardEventListener
 {
