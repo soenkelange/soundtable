@@ -4,6 +4,8 @@
 #include "abstractprojectwidget.h"
 #include "abstractprojectinfo.h"
 #include "videoengine/videoplayer.h"
+#include "videoengine/cardsprocessor.h"
+#include "widgets/cardsprocessorsettings.h"
 
 namespace Ui {
 class ProjectBWidget;
@@ -26,6 +28,7 @@ public:
 private:
     Ui::ProjectBWidget *ui;
     VideoPlayer *videoPlayer;
+    CardsProcessorSettings *processorSettings;
     CardsProcessor *cardsProcessor;
 };
 

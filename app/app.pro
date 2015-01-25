@@ -30,7 +30,8 @@ SOURCES += main.cpp\
     b/soundengine/soundlistener.cpp \
     b/soundengine/soundengine.cpp \
     b/videoengine/card.cpp \
-    b/videoengine/cardsprocessor.cpp
+    b/videoengine/cardsprocessor.cpp \
+    b/widgets/cardsprocessorsettings.cpp
 
 HEADERS  += mainwindow.h \
     a/projectafactory.h \
@@ -49,13 +50,15 @@ HEADERS  += mainwindow.h \
     b/soundengine/soundlistener.h \
     b/soundengine/soundengine.h \
     b/videoengine/card.h \
-    b/videoengine/cardsprocessor.h
+    b/videoengine/cardsprocessor.h \
+    b/widgets/cardsprocessorsettings.h
 
 FORMS    += mainwindow.ui \
     a/projectawidget.ui \
     b/projectbwidget.ui \
     b/widgets/videooutputtabwidget.ui \
     b/widgets/videoplayercontrols.ui \
-    b/widgets/settingstabwidget.ui
+    b/widgets/settingstabwidget.ui \
+    b/widgets/cardsprocessorsettings.ui
 
 include(../libs/videoengine/videoengine.pri)
