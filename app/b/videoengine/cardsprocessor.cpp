@@ -6,7 +6,7 @@
 
 CardsProcessor::CardsProcessor() :
     _output(CardsProcessor::Original),
-    _threshold(127),
+    _threshold(1000),
     _cannyLowerThreshold(100),
     _cannyUpperThreshold(300),
     _cannyGradient(false),
@@ -102,7 +102,7 @@ cv::Mat CardsProcessor::processColor(const cv::Mat &source, CardsProcessor::CK_C
         if (hierarchy[i][2] == -1 || hierarchy[i][3] != -1) {
             continue;
         }
-        if (cv::contourArea(contours[i]) < 100) {
+        if (cv::contourArea(contours[i]) < 25000) {
             continue;
         }
 
@@ -114,7 +114,7 @@ cv::Mat CardsProcessor::processColor(const cv::Mat &source, CardsProcessor::CK_C
         for(int j = 0; j < childs.size(); j++) {
             int childIdx = childs[j];
             double contourArea = cv::contourArea(contours[childIdx]);
-            if (contourArea < 50) {
+            if (contourArea < 1000) {
                 continue;
             }
             std::vector<cv::Point> contour = contours[childIdx];
@@ -422,10 +422,10 @@ void CardsProcessor::setCannyGradient(bool gradient)
 void CardsProcessor::initColorKeyingOption()
 {
     qDebug() << "Init ColorKeying options..";
-    cv::Scalar yellowLower = cv::Scalar(0,56,163);
-    cv::Scalar yellowUpper = cv::Scalar(22,154,255);
-    cv::Scalar redLower = cv::Scalar(160,152,122);
-    cv::Scalar redUpper = cv::Scalar(179,255,215);
+    cv::Scalar yellowLower = cv::Scalar(0,78,183);
+    cv::Scalar yellowUpper = cv::Scalar(20,148,255);
+    cv::Scalar redLower = cv::Scalar(132,114,152);
+    cv::Scalar redUpper = cv::Scalar(179,228,245);
     cv::Scalar blueLower = cv::Scalar(95, 114, 146);
     cv::Scalar blueUpper = cv::Scalar(108,238,255);
 

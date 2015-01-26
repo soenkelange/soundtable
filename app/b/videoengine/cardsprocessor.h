@@ -50,6 +50,7 @@ public:
                     std::vector<bool> &checked);
 
     QList<Card> getDetectableCards() const;
+    Card getCard(Card::Color color, int shape);
 
 
     CardsProcessor::Output output() const;
@@ -80,7 +81,6 @@ protected:
     cv::Mat applyCannyEdgeDetection(const cv::Mat &grayscale);
     cv::Mat applyColorKeying(const cv::Mat &rgb, CardsProcessor::CK_Color color);
 
-    Card getCard(Card::Color color, int shape);
     Card::Color processorToCardColor(CardsProcessor::CK_Color color);
     void updateFrameCounter();
     void debugOutput(QString output);
