@@ -30,6 +30,8 @@ public:
 
     float masterVolume() const;
     void setMasterVolume(float volume);
+    float defaultMinDistance() const;
+    void setDefaultMinDistance(float minDistance);
 
 protected:
     void updateListenerPosition();
@@ -38,7 +40,6 @@ private:
     irrklang::ISoundEngine *_engine;
     SoundListener *_listener;
     QList<SoundSource*> _soundSources;
-
 };
 
 #endif // SOUNDENGINE_H

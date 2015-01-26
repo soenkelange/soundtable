@@ -5,7 +5,8 @@
 
 SoundEngine::SoundEngine() :
     _engine(irrklang::createIrrKlangDevice()),
-    _soundSources()
+    _soundSources(),
+    _listener(0)
 {
     _listener = new SoundListener(this);
     qDebug() << _engine->isMultiThreaded();
@@ -21,7 +22,6 @@ Sound* SoundEngine::play(SoundSource *source, const irrklang::vec3df &postion, b
 {
     irrklang::ISound *iSound = _engine->play3D(source->soundSource(), postion, looped, false, true);
     Sound *sound = new Sound(iSound);
-
     qDebug() << "Play " << source->name();
     return sound;
 }
@@ -84,5 +84,16 @@ float SoundEngine::masterVolume() const
 
 void SoundEngine::setMasterVolume(float volume)
 {
+    qDebug() << "setmastervolume" << QString::number(volume);
     _engine->setSoundVolume(volume);
+}
+
+float SoundEngine::defaultMinDistance() const
+{
+    return _engine->getDefault3DSoundMinDistance();
+}
+
+void SoundEngine::setDefaultMinDistance(float minDistance) {
+    qDebug() << "Set defaultMinDistance: " << QString::number(minDistance);
+    _engine->setDefault3DSoundMinDistance(minDistance);
 }
