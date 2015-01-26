@@ -49,8 +49,8 @@ public:
                     std::vector<int> &childs,
                     std::vector<bool> &checked);
 
-    QList<Card> getDetectableCards() const;
-    Card getCard(Card::Color color, int shape);
+    std::vector<Card*> getDetectableCards() const;
+    Card *getCard(Card::Color color, int shape);
 
 
     CardsProcessor::Output output() const;
@@ -96,7 +96,7 @@ private:
     VideoFormat _videoFormat;
     int _frameCounter;
     CardsProcessor::Output _output;
-    QList<Card> _detectableCards;
+    std::vector<Card*> _detectableCards;
 
     // Settings
     int _threshold;

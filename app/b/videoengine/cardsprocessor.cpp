@@ -36,11 +36,10 @@ void CardsProcessor::initDetectableCards() {
 
     for(unsigned long color = 0; color < colors.size(); color++) {
         for(unsigned long shape = 0; shape < shapes.size(); shape++) {
-            Card card(colors[color], shapes[shape]);
-            _detectableCards.append(card);
+            Card *card = new Card(colors[color], shapes[shape]);
+            _detectableCards.push_back(card);
         }
     }
-
 }
 
 void CardsProcessor::startProcessing(const VideoFormat &format)
@@ -54,8 +53,8 @@ cv::Mat CardsProcessor::process(const cv::Mat &source)
 {
     // Set all cards detected = false;
     for(int i = 0; i < _detectableCards.size(); i++) {
-        Card card = _detectableCards.at(i);
-        card.setDetected(false);
+        Card *card = _detectableCards.at(i);
+        card->setDetected(false);
     }
 
     cv::Mat traceview = cv::Mat::zeros(source.size(), CV_8UC3);
@@ -65,9 +64,9 @@ cv::Mat CardsProcessor::process(const cv::Mat &source)
 
     // Set all undetected cards to visible = false;
     for(int i = 0; i < _detectableCards.size(); i++) {
-        Card card = _detectableCards.at(i);
-        if(!card.isDetected()) {
-            card.setVisibility(false);
+        Card *card = _detectableCards.at(i);
+        if(!card->isDetected()) {
+            card->setVisibility(false);
         }
     }
     switch(_output) {
@@ -155,16 +154,16 @@ cv::Mat CardsProcessor::processColor(const cv::Mat &source, CardsProcessor::CK_C
         std::vector<cv::Point> approxPoly;
         cv::approxPolyDP(contours[i], approxPoly, 3, true);
         cv::RotatedRect rect = cv::minAreaRect(approxPoly);
-        Card card = getCard(processorToCardColor(ckColor), shape);
-        card.setPosition(rect.center);
-        card.setRotation(rotation);
-        card.setVisibility(true);
-        card.setDetected(true);
+        Card *card = getCard(processorToCardColor(ckColor), shape);
+        card->setPosition(rect.center);
+        card->setRotation(rotation);
+        card->setVisibility(true);
+        card->setDetected(true);
 
         if(_output == CardsProcessor::Traceview) {
-            drawRotatedRect(traceview, rect, card.colorAsScalar());
-            drawCross(traceview, card.position(), cv::Scalar(0,255,0));
-            cv::putText(traceview, card.shapeName().toStdString() + " " + QString::number(card.rotation()).toStdString(), card.position(), cv::FONT_HERSHEY_PLAIN, 2, cv::Scalar(255,255,255), 2);
+            drawRotatedRect(traceview, rect, card->colorAsScalar());
+            drawCross(traceview, card->position(), cv::Scalar(0,255,0));
+            cv::putText(traceview, card->shapeName().toStdString() + " " + QString::number(card->rotation()).toStdString(), card->position(), cv::FONT_HERSHEY_PLAIN, 2, cv::Scalar(255,255,255), 2);
         }
     }
 
@@ -283,7 +282,7 @@ cv::Mat CardsProcessor::applyColorKeying(const cv::Mat &rgb, CardsProcessor::CK_
     return binary;
 }
 
-Card CardsProcessor::getCard(Card::Color color, int shape)
+Card* CardsProcessor::getCard(Card::Color color, int shape)
 {
     // TODO: Poor solution, find a better way
     Card::Shape cardShape;
@@ -305,8 +304,8 @@ Card CardsProcessor::getCard(Card::Color color, int shape)
         break;
     }
     for(int i = 0; i <= _detectableCards.size(); i++) {
-        Card card = _detectableCards.at(i);
-        if (card.color() == color && card.shape() == cardShape) {
+        Card *card = _detectableCards[i];
+        if (card->color() == color && card->shape() == cardShape) {
             return card;
         }
     }
@@ -343,7 +342,7 @@ void CardsProcessor::debugOutput(QString output)
     }
 }
 
-QList<Card> CardsProcessor::getDetectableCards() const
+std::vector<Card *> CardsProcessor::getDetectableCards() const
 {
     return _detectableCards;
 }
