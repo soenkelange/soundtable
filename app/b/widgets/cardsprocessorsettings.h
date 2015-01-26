@@ -26,6 +26,7 @@ protected slots:
     void updateLowerValueLineEdit(int value);
     void updateUpperValueLineEdit(int value);
     void selectedColorChanged(int index);
+    void selectedOutputChanged(int index);
     void updateColorKeyingComponents();
 
 protected:

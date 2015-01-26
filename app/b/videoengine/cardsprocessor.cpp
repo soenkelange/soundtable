@@ -5,6 +5,7 @@
 #include <QDebug>
 
 CardsProcessor::CardsProcessor() :
+    _output(CardsProcessor::Original),
     _threshold(127),
     _cannyLowerThreshold(100),
     _cannyUpperThreshold(300),
@@ -69,7 +70,18 @@ cv::Mat CardsProcessor::process(const cv::Mat &source)
             card.setVisibility(false);
         }
     }
-    return traceview;
+    switch(_output) {
+    case CardsProcessor::BlueBinary:
+        return blueBinary;
+    case CardsProcessor::YellowBinary:
+        return yellowBinary;
+    case CardsProcessor::RedBinary:
+        return redBinary;
+    case CardsProcessor::Traceview:
+        return traceview;
+    default:
+        return source;
+    }
 }
 
 cv::Mat CardsProcessor::processColor(const cv::Mat &source, CardsProcessor::CK_Color ckColor, cv::Mat &traceview)
@@ -111,6 +123,13 @@ cv::Mat CardsProcessor::processColor(const cv::Mat &source, CardsProcessor::CK_C
                 largestAreaIdx = childIdx;
                 largestArea = contourArea;
             }
+            if(_output == CardsProcessor::Traceview) {
+                std::vector<cv::Point> approxPoly;
+                cv::approxPolyDP(contours[childIdx], approxPoly, 3, true);
+                cv::RotatedRect rect = cv::minAreaRect(approxPoly);
+                drawRotatedRect(traceview, rect, cv::Scalar(0,255,0));
+                drawCross(traceview, rect.center, cv::Scalar(0,255,0));
+            }
         }
 
         // Find Shape
@@ -142,9 +161,11 @@ cv::Mat CardsProcessor::processColor(const cv::Mat &source, CardsProcessor::CK_C
         card.setVisibility(true);
         card.setDetected(true);
 
-        drawRotatedRect(traceview, rect, card.colorAsScalar());
-        drawCross(traceview, card.position(), cv::Scalar(0,255,0));
-        cv::putText(traceview, card.shapeName().toStdString(), card.position(), cv::FONT_HERSHEY_PLAIN, 2, cv::Scalar(255,255,255), 2);
+        if(_output == CardsProcessor::Traceview) {
+            drawRotatedRect(traceview, rect, card.colorAsScalar());
+            drawCross(traceview, card.position(), cv::Scalar(0,255,0));
+            cv::putText(traceview, card.shapeName().toStdString() + " " + QString::number(card.rotation()).toStdString(), card.position(), cv::FONT_HERSHEY_PLAIN, 2, cv::Scalar(255,255,255), 2);
+        }
     }
 
     updateFrameCounter();
@@ -325,6 +346,35 @@ void CardsProcessor::debugOutput(QString output)
 QList<Card> CardsProcessor::getDetectableCards() const
 {
     return _detectableCards;
+}
+
+CardsProcessor::Output CardsProcessor::output() const
+{
+    return _output;
+}
+
+void CardsProcessor::setOutput(int output)
+{
+    qDebug() << "output" << output;
+    switch(output) {
+    case CardsProcessor::BlueBinary:
+        _output = CardsProcessor::BlueBinary;
+        break;
+    case CardsProcessor::YellowBinary:
+        _output = CardsProcessor::YellowBinary;
+        break;
+    case CardsProcessor::RedBinary:
+        _output = CardsProcessor::RedBinary;
+        break;
+    case CardsProcessor::Traceview:
+        _output = CardsProcessor::Traceview;
+        break;
+    case CardsProcessor::Original:
+        _output = CardsProcessor::Original;
+        break;
+    default:
+        qDebug() << "CardsProcessor::setOutput - Unhandled case";
+    }
 }
 
 int CardsProcessor::threshold() const

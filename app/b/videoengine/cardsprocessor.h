@@ -10,6 +10,14 @@ class CardsProcessor : public QObject, public VideoProcessor
     Q_OBJECT
 
 public:
+    enum Output {
+        Original,
+        Traceview,
+        BlueBinary,
+        RedBinary,
+        YellowBinary,
+    };
+
     enum CK_Color {
         Yellow = 0,
         Red = 1,
@@ -43,8 +51,9 @@ public:
 
     QList<Card> getDetectableCards() const;
 
-    int threshold() const;
 
+    CardsProcessor::Output output() const;
+    int threshold() const;
     int cannyLowerThreshold() const;
     int cannyUpperThreshold() const;
     bool cannyGradient() const;
@@ -77,6 +86,7 @@ protected:
     void debugOutput(QString output);
 
 public slots:
+    void setOutput(int output);
     void setThreshold(int threshold);
     void setCannyLowerThreshold(int threshold);
     void setCannyUpperThreshold(int threshold);
@@ -85,6 +95,7 @@ public slots:
 private:
     VideoFormat _videoFormat;
     int _frameCounter;
+    CardsProcessor::Output _output;
     QList<Card> _detectableCards;
 
     // Settings

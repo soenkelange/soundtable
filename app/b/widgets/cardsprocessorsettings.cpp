@@ -39,6 +39,15 @@ void CardsProcessorSettings::setCardsProcessor(CardsProcessor *processor)
 {
     _processor = processor;
 
+    // Output
+    ui->outputSelector->setCurrentIndex(_processor->output());
+    ui->outputSelector->addItem("Original", QVariant(CardsProcessor::Original));
+    ui->outputSelector->addItem("Traceview", QVariant(CardsProcessor::Traceview));
+    ui->outputSelector->addItem("Binärbild Gelb", QVariant(CardsProcessor::YellowBinary));
+    ui->outputSelector->addItem("Binärbild Blau", QVariant(CardsProcessor::BlueBinary));
+    ui->outputSelector->addItem("Binärbild Rot", QVariant(CardsProcessor::RedBinary));
+    connect(ui->outputSelector, SIGNAL(currentIndexChanged(int)), this, SLOT(selectedOutputChanged(int)));
+
     // Threshold
     ui->thresholdSlider->setValue(_processor->threshold());
     connect(ui->thresholdSlider, SIGNAL(valueChanged(int)), _processor, SLOT(setThreshold(int)));
@@ -174,6 +183,13 @@ void CardsProcessorSettings::selectedColorChanged(int index)
     }
     if (_processor != 0) {
         updateColorKeyingComponents();
+    }
+}
+
+void CardsProcessorSettings::selectedOutputChanged(int index) {
+    if (_processor != 0) {
+        int output = ui->outputSelector->itemData(index).toInt();
+        _processor->setOutput(output);
     }
 }
 
