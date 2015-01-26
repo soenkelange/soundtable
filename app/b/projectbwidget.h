@@ -3,9 +3,11 @@
 
 #include "abstractprojectwidget.h"
 #include "abstractprojectinfo.h"
+#include "soundtable.h"
 #include "videoengine/videoplayer.h"
 #include "videoengine/cardsprocessor.h"
 #include "widgets/cardsprocessorsettings.h"
+#include "widgets/soundenginesettings.h"
 
 namespace Ui {
 class ProjectBWidget;
@@ -20,16 +22,18 @@ public:
     ~ProjectBWidget();
 
     void dirtyHack();
-    void setupVideoPlayerConnection();
+    void initSettingTabs();
+    void initVideoPlayer();
 
     bool handleOpenCamera(int device);
     void handleOpenFile(QString filePath);
 
 private:
     Ui::ProjectBWidget *ui;
+    SoundTable *soundTable;
     VideoPlayer *videoPlayer;
     CardsProcessorSettings *processorSettings;
-    CardsProcessor *cardsProcessor;
+    SoundEngineSettings *soundEngineSettings;
 };
 
 #endif // PROJECTBWIDGET_H

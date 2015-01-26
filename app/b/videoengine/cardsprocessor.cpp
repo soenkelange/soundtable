@@ -69,7 +69,6 @@ cv::Mat CardsProcessor::process(const cv::Mat &source)
             card.setVisibility(false);
         }
     }
-
     return traceview;
 }
 

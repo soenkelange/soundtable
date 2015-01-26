@@ -2,24 +2,20 @@
 #include "ui_projectbwidget.h"
 
 #include <QDebug>
-#include "videoengine.h"
 #include <QFile>
-#include "soundengine/soundsource.h"
 
 ProjectBWidget::ProjectBWidget(QWidget *parent, AbstractProjectInfo *projectInfo) :
     AbstractProjectWidget(parent, projectInfo),
     ui(new Ui::ProjectBWidget),
-    cardsProcessor(new CardsProcessor),
+    soundTable(new SoundTable),
+    videoPlayer(new VideoPlayer),
     processorSettings(new CardsProcessorSettings),
-    videoPlayer(new VideoPlayer)
+    soundEngineSettings(new SoundEngineSettings)
 {
     ui->setupUi(this);
 
-
-    ui->settingsWidget->addTab(processorSettings, "Prozessor");
-    processorSettings->setCardsProcessor(cardsProcessor);
-    videoPlayer->setVideoProcessor(cardsProcessor);
-    setupVideoPlayerConnection();
+    initVideoPlayer();
+    initSettingTabs();
 
     // REMOVE - BEGIN
     dirtyHack();
@@ -28,9 +24,10 @@ ProjectBWidget::ProjectBWidget(QWidget *parent, AbstractProjectInfo *projectInfo
 
 ProjectBWidget::~ProjectBWidget()
 {
-    delete videoPlayer;
     delete processorSettings;
-    delete cardsProcessor;
+    delete soundEngineSettings;
+    delete videoPlayer;
+    delete soundTable;
     delete ui;
 }
 
@@ -43,8 +40,19 @@ void ProjectBWidget::dirtyHack()
 }
 // REMOVE - END
 
-void ProjectBWidget::setupVideoPlayerConnection()
+void ProjectBWidget::initSettingTabs()
 {
+    ui->settingsWidget->addTab(processorSettings, "Prozessor");
+    processorSettings->setCardsProcessor(soundTable->cardProcessor());
+    ui->settingsWidget->addTab(soundEngineSettings, "Audio");
+    soundEngineSettings->setSoundEngine(soundTable->soundEngine());
+}
+
+void ProjectBWidget::initVideoPlayer()
+{
+    // Connect with processor
+    videoPlayer->setVideoProcessor(soundTable->cardProcessor());
+
     // Connect with controls
     connect(ui->videoPlayerControls, SIGNAL(play()), videoPlayer, SLOT(play()));
     connect(ui->videoPlayerControls, SIGNAL(stop()), videoPlayer, SLOT(stop()));
@@ -65,8 +73,5 @@ bool ProjectBWidget::handleOpenCamera(int device)
 }
 
 void ProjectBWidget::handleOpenFile(QString filePaht) {
-    SoundSource s(filePaht);
-    QString name = s.name();
-    qDebug() << "Path: " << s.path() << " Name: " << s.name() << " PlayLength: " << s.playLength();
     videoPlayer->setInput(filePaht);
 }
