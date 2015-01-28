@@ -21,7 +21,6 @@ public:
     explicit ProjectBWidget(QWidget *parent = 0, AbstractProjectInfo *projectInfo = 0);
     ~ProjectBWidget();
 
-    void dirtyHack();
     void initSettingTabs();
     void initVideoPlayer();
 
