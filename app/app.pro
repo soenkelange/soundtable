@@ -68,9 +68,7 @@ FORMS    += mainwindow.ui \
 
 include(../libs/videoengine/videoengine.pri)
 
+macx: LIBS += -L$$PWD/../libs/irrKlang/bin/macosx-gcc/ -lirrklang
 
-
-unix: LIBS += -L$$PWD/../../irrKlang/bin/macosx-gcc/ -lirrklang
-
-INCLUDEPATH += $$PWD/../../irrKlang/include
-DEPENDPATH += $$PWD/../../irrKlang/include
+INCLUDEPATH += $$PWD/../libs/irrKlang/include
+DEPENDPATH += $$PWD/../libs/irrKlang/include
