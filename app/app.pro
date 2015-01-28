@@ -67,8 +67,4 @@ FORMS    += mainwindow.ui \
     b/widgets/soundenginesettings.ui
 
 include(../libs/videoengine/videoengine.pri)
-
-macx: LIBS += -L$$PWD/../libs/irrKlang/bin/macosx-gcc/ -lirrklang
-
-INCLUDEPATH += $$PWD/../libs/irrKlang/include
-DEPENDPATH += $$PWD/../libs/irrKlang/include
+include(../libs/irrKlang/irrKlang.pri)
